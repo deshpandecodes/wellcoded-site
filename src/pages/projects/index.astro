@@ -1,0 +1,129 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const projects = [
+  {
+    number: "01",
+    name: "lifestyle360",
+    description: "A local-first personal data analyst. Connect your bank, fitness tracker, and GitHub. Ask questions in plain English. Your data never leaves your machine.",
+    stack: ["Rust", "DuckDB", "Claude API"],
+    status: "In progress",
+    link: null,
+  },
+];
+---
+
+<Layout title="Projects" description="Weekend projects built in public — one every week.">
+  <h1>Projects</h1>
+  <p class="subtitle">One weekend, one project. Every week.</p>
+
+  <div class="project-list">
+    {projects.map((project) => (
+      <div class="project-card">
+        <div class="project-meta">
+          <span class="number">#{project.number}</span>
+          <span class={`status ${project.status === 'In progress' ? 'active' : 'done'}`}>
+            {project.status}
+          </span>
+        </div>
+        <h2>{project.name}</h2>
+        <p>{project.description}</p>
+        <div class="stack">
+          {project.stack.map((tag) => (
+            <span class="tag">{tag}</span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</Layout>
+
+<style>
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    margin-bottom: 3rem;
+  }
+
+  .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color 0.15s;
+  }
+
+  .project-card:hover {
+    border-color: #9ca3af;
+  }
+
+  .project-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .number {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  .status {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+  }
+
+  .status.active {
+    background: #dbeafe;
+    color: #1d4ed8;
+  }
+
+  .status.done {
+    background: #d1fae5;
+    color: #065f46;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: var(--color-body);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    color: var(--muted);
+    background: #f3f4f6;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+</style>

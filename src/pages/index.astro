@@ -1,17 +1,150 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Home">
+  <section class="hero">
+    <h1>Building a well-coded life.</h1>
+    <p class="tagline">
+      I'm an engineer learning to build AI-powered products. Every weekend I ship something real —
+      and write about every decision along the way.
+    </p>
+    <div class="cta-row">
+      <a href="/projects" class="btn-primary">See the projects</a>
+      <a href="/blog" class="btn-secondary">Read the blog</a>
+    </div>
+  </section>
+
+  <section class="about">
+    <h2>Who's behind this</h2>
+    <p>
+      I'm Viraj — an inquisitive generalist who has spent years working at the intersection
+      of data and product decisions. That curiosity is now pointing somewhere specific:
+      building AI-powered products that solve real problems.
+    </p>
+    <p>
+      My long-term goal is to combine strong software and data engineering fundamentals with
+      product thinking — the kind of product manager who can spec it, build it, and ship it.
+      AI makes that possible in a way it never was before.
+    </p>
+    <p>
+      The north star: build something every weekend until one of them creates
+      real disruption — something that changes how people work, think, or live.
+    </p>
+  </section>
+
+  <section class="about">
+    <h2>What this site is</h2>
+    <p>
+      <strong>wellcoded.life</strong> is my build-in-public journal. Every weekend project gets
+      a write-up — the idea, the architecture decisions, what failed, what surprised me.
+      No polished post-mortems. Just the actual process, documented in real time.
+    </p>
+    <p>
+      If you're interested in AI, data engineering, or what it looks like to try to build
+      something from zero — this is for you.
+    </p>
+  </section>
+
+  <section class="current">
+    <h2>Weekend #1 — lifestyle360</h2>
+    <p>
+      A local-first personal data analyst built in Rust. Connect your bank, fitness tracker,
+      and GitHub. Ask questions in plain English. Your data never leaves your machine.
+    </p>
+    <a href="/projects">Follow the build →</a>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    padding: 3rem 0 4rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 480px;
+    margin-bottom: 2rem;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    padding: 0.6rem 1.25rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .btn-primary:hover {
+    text-decoration: none;
+    opacity: 0.9;
+  }
+
+  .btn-secondary {
+    color: var(--text);
+    padding: 0.6rem 1.25rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover {
+    text-decoration: none;
+    background: #f3f4f6;
+  }
+
+  .about, .current {
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    margin-bottom: 0.75rem;
+    color: var(--color-body);
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.6rem;
+    }
+
+    .tagline {
+      font-size: 1rem;
+    }
+
+    .hero {
+      padding: 2rem 0 3rem;
+    }
+  }
+</style>

@@ -1,0 +1,257 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Building a well-coded life — tools, data, and weekend projects by Viraj Deshpande." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <title>{title} — wellcoded.life</title>
+    <script is:inline>
+      const saved = localStorage.getItem('theme');
+      const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', saved ?? preferred);
+    </script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/" class="logo">wellcoded.life</a>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a href="/blog">Blog</a>
+            <a href="/projects">Projects</a>
+          </div>
+          <button id="theme-toggle" aria-label="Toggle theme">
+            <!-- Sun: shown in light mode -->
+            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/>
+              <line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+            <!-- Moon: shown in dark mode -->
+            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <span class="theme-label-light">Light</span>
+            <span class="theme-label-dark">Dark</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <p>Built in public by Viraj Deshpande · <a href="https://github.com/virajdeshpande" target="_blank">GitHub</a></p>
+    </footer>
+
+    <script is:inline>
+      document.getElementById('theme-toggle')?.addEventListener('click', () => {
+        const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  :root {
+    --bg: #fafafa;
+    --text: #111111;
+    --muted: #6b7280;
+    --accent: #2563eb;
+    --border: #e5e7eb;
+    --color-body: #374151;
+    --max-width: 680px;
+  }
+
+  [data-theme="dark"] {
+    --bg: #111111;
+    --text: #f9fafb;
+    --muted: #9ca3af;
+    --accent: #60a5fa;
+    --border: #27272a;
+    --color-body: #d1d5db;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+  }
+
+  nav {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .logo:hover {
+    text-decoration: none;
+    color: var(--accent);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .nav-links a:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  #theme-toggle {
+    background: none;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    color: var(--muted);
+    padding: 0.3rem 0.65rem;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    font-family: inherit;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+  }
+
+  #theme-toggle:hover {
+    color: var(--text);
+    border-color: var(--muted);
+    background: var(--border);
+  }
+
+  /* Scoped to html to avoid selector bleeding */
+  html[data-theme="dark"] .icon-sun        { display: block; }
+  html[data-theme="dark"] .icon-moon       { display: none; }
+  html[data-theme="dark"] .theme-label-light { display: block; }
+  html[data-theme="dark"] .theme-label-dark  { display: none; }
+
+  html:not([data-theme="dark"]) .icon-sun        { display: none; }
+  html:not([data-theme="dark"]) .icon-moon       { display: block; }
+  html:not([data-theme="dark"]) .theme-label-light { display: none; }
+  html:not([data-theme="dark"]) .theme-label-dark  { display: block; }
+
+  main {
+    flex: 1;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    width: 100%;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  footer a {
+    color: var(--muted);
+  }
+
+  footer a:hover {
+    color: var(--text);
+  }
+
+  @media (max-width: 480px) {
+    nav {
+      height: auto;
+      padding: 0.75rem 0;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .nav-right {
+      gap: 0.75rem;
+    }
+
+    .nav-links {
+      gap: 1rem;
+    }
+
+    .theme-label-light,
+    .theme-label-dark {
+      display: none !important;
+    }
+
+    main {
+      padding: 2rem 1.25rem;
+    }
+  }
+</style>

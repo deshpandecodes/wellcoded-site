@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Blog" description="Build-in-public posts from wellcoded.life — weekend projects, decisions, and lessons learned.">
+  <h1>Blog</h1>
+  <p class="subtitle">Building in public. Every weekend project gets a post.</p>
+
+  <div class="empty-state">
+    <p>First post coming soon — follow along as I build lifestyle360, a local-first personal data analyst in Rust.</p>
+  </div>
+</Layout>
+
+<style>
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    margin-bottom: 3rem;
+  }
+
+  .empty-state {
+    padding: 2rem;
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+</style>
